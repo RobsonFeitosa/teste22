@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-chat-bloom
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: chat-bloom-nexus
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: fcac41078f2abd6c272b8601a8511f0c
+    volumes:
+      - ./postgres-data:/var/lib/postgresql
