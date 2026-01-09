@@ -27,7 +27,11 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ubuntu/meu-app
-            # Instalação e reinicialização do app
-            npm install
+            cd /home/ubuntu/meu-app 
+            yarn install
+             
+            yarn build
+              
             pm2 restart boilerplate || pm2 start dist/main.js --name boilerplate
+            pm2 save
+
