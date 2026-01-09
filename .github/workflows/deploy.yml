@@ -27,18 +27,25 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            # Garante que o shell use o Node 20 instalado via NVM
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            nvm use 20
+
             cd /home/ubuntu/meu-app
             
-            # 1. Atualiza as bibliotecas (libs) baseadas no yarn.lock
-            yarn install --frozen-lockfile
+            # 1. Limpeza para evitar o erro de conflito de lockfiles que vimos no log
+            rm -f package-lock.json
+            rm -rf dist node_modules
             
-            # 2. Roda o build para gerar a pasta /dist
+            # 2. Instalação (o Nest 11 exige Node 20+)
+            yarn install
+            
+            # 3. Build usando o compilador SWC configurado no seu package.json
             yarn build
             
-            # 3. Reinicia o processo no PM2
-            # Usamos o caminho dist/main.js que é o padrão do NestJS
+            # 4. Gerenciamento do processo
+            # O start:prod do seu package.json aponta para node dist/main
             pm2 restart boilerplate || pm2 start dist/main.js --name boilerplate
-            
-            # 4. Salva a lista de processos para persistir após reboot da EC2
             pm2 save
 
