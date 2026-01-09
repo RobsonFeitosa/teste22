@@ -15,7 +15,7 @@ import { TypeormChatsRepository } from './typeorm/repositories/typeorm-chats-rep
         port: Number(process.env.DB_POSTGRES_PORT) || 5432,
         username: process.env.DB_POSTGRES_USERNAME || 'postgres',
         password: process.env.DB_POSTGRES_PASSWORD || 'fcac41078f2abd6c272b8601a8511f0c',
-        database: process.env.DB_POSTGRES_DATABASE || 'chat-bloom-nexus',
+        database: process.env.DB_POSTGRES_DATABASE || 'bp-nexus',
         entities: [__dirname + '/../../app/entities/*{.ts,.js}'],
         migrations: [__dirname + '/migrations/*{.ts,.js}'],
         synchronize: false,

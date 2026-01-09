@@ -6,7 +6,7 @@ const dataSource = new DataSource({
   port: 5432,
   username: 'postgres',
   password: 'fcac41078f2abd6c272b8601a8511f0c',
-  database: 'chat-bloom-nexus',
+  database: 'bp-nexus',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   migrations: [__dirname + '/migrations/*{.ts,.js}'],
   synchronize: false,

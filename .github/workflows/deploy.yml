@@ -1,0 +1,45 @@
+name: Deploy via SSH (RAW)
+
+on:
+  push:
+    branches:
+      - main
+
+env: 
+  SSH_HOST: "base1.easychannel.online"     
+  SSH_USER: "root"           
+  SSH_PORT: "232"               
+
+  SSH_PRIVATE_KEY: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    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 
+    -----END OPENSSH PRIVATE KEY-----
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Salvar chave SSH em arquivo
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ls -l ~/.ssh
+
+      - name: Add host to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Deploy on VM via SSH
+        run: |
+          ssh \
+            -i ~/.ssh/id_rsa \
+            -p "$SSH_PORT" \
+            -o IdentitiesOnly=yes \
+            "$SSH_USER@$SSH_HOST" \
+            "cd /var/www && git pull origin development"

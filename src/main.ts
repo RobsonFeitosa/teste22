@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { config } from 'dotenv';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 config();
 
@@ -21,6 +22,16 @@ async function bootstrap() {
 
   app.enableCors(corsOptions);
 
+  const configSwagger = new DocumentBuilder()
+    .setTitle('API Boilerplate')
+    .setDescription('The API Boilerplate description')
+    .setVersion('1.0')
+    .addTag('boilerplate')
+    .build();
+  const document = SwaggerModule.createDocument(app, configSwagger);
+  SwaggerModule.setup('docs', app, document);
+
   await app.listen(3333);
 }
 bootstrap();
+
